@@ -10,6 +10,8 @@ import UIKit
 
 @IBDesignable open class CardHighlight: Card {
 
+    private var buttonWillShow = true
+    
     /**
      Text of the title label.
      */
@@ -66,6 +68,14 @@ import UIKit
         }
     }
     /**
+     Corner radius for the icon ImageView
+     */
+    @IBInspectable public var isButtonHidden: Bool = false {
+        didSet{
+           self.buttonWillShow = !isButtonHidden
+        }
+    }
+    /**
      Text for the card's button.
      */
     @IBInspectable public var buttonText: String = "view" {
@@ -105,8 +115,9 @@ import UIKit
         backgroundIV.addSubview(titleLbl)
         backgroundIV.addSubview(itemTitleLbl)
         backgroundIV.addSubview(itemSubtitleLbl)
+        if buttonWillShow {
         backgroundIV.addSubview(actionBtn)
-        
+        }
         if backgroundImage == nil {  backgroundIV.addSubview(bgIconIV); }
         else { bgIconIV.alpha = 0 }
     }
